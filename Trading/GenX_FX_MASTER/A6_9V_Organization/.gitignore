@@ -1,0 +1,61 @@
+# Environment files - NEVER COMMIT
+.env
+.env.*
+!.env.example
+
+# Credentials and secrets - NEVER COMMIT
+*credentials*
+*secrets*
+*backup*
+GenX_FX_Master_Credentials.*
+GenX_FX_Credentials_Backup.txt
+
+# Encrypted backups
+backups/
+*.env.asc
+*.sha256
+*.backup
+
+# Logs
+logs/
+*.log
+
+# Database
+*.db
+*.sqlite
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Docker
+.dockerignore
+
+# IDE
+.vscode/
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/tasks.json
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# YAML files - often contain secrets
+*.yml
+*.yaml
+!.github/workflows/*.yml

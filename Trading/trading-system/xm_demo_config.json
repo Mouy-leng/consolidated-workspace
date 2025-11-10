@@ -1,0 +1,16 @@
+{
+  "xm_demo": {
+    "server": "XMGlobal-Demo",
+    "login": "Lengkundee01@gmail.com",
+    "password": "@Leng3N6AV9",
+    "balance": 10000.0,
+    "leverage": "1:888"
+  },
+  "setup_date": "2025-10-31T11:10:11.229118",
+  "test_results": {
+    "spreads": {},
+    "execution_time": {},
+    "slippage": {},
+    "connection_quality": {}
+  }
+}

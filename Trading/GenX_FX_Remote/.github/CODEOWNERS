@@ -1,0 +1,65 @@
+# Global code owners
+* @Mouy-leng
+
+# Python files
+*.py @Mouy-leng
+
+# Configuration files
+*.yml *.yaml *.json *.toml @Mouy-leng
+
+# Documentation
+*.md @Mouy-leng
+
+# Docker files
+Dockerfile* docker-compose* @Mouy-leng
+
+# GitHub workflows
+.github/workflows/ @Mouy-leng
+
+# AWS and deployment
+aws/ deploy/ @Mouy-leng
+
+# Expert Advisors
+expert-advisors/ @Mouy-leng
+
+# Core modules
+core/ @Mouy-leng
+
+# API and services
+api/ @Mouy-leng
+
+# Scripts and utilities
+scripts/ utils/ @Mouy-leng
+
+# Tests
+tests/ @Mouy-leng
+
+# 🔒 CRITICAL SECURITY FILES - ALWAYS REQUIRES REVIEW
+# Main orchestrator files
+main.py @Mouy-leng
+genx_cli.py @Mouy-leng
+genx_master_cli.py @Mouy-leng
+genx_unified_cli.py @Mouy-leng
+head_cli.py @Mouy-leng
+
+# Docker and deployment scripts
+setup_aws_deployment.sh @Mouy-leng
+setup_github_secrets.sh @Mouy-leng
+quick_aws_deploy.sh @Mouy-leng
+deploy_*.sh @Mouy-leng
+
+# Configuration and secrets
+.env* @Mouy-leng
+*.key @Mouy-leng
+*.pem @Mouy-leng
+*.p12 @Mouy-leng
+*.pfx @Mouy-leng
+
+# Database and sensitive data
+database/ @Mouy-leng
+shared/ @Mouy-leng
+services/ @Mouy-leng
+
+# Trading and financial logic
+train_ai_system.py @Mouy-leng
+test_*.py @Mouy-leng

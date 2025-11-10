@@ -1,0 +1,8 @@
+{
+  "plugins": [
+    "jules_plugin",
+    "codacy_plugin",
+    "license_checker",
+    "amp_adapter"
+  ]
+}

@@ -1,0 +1,17 @@
+[Unit]
+Description=GenX EA Docker Compose
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/opt/GenX-EA_Script
+ExecStart=/usr/local/bin/docker-compose up -d
+ExecStop=/usr/local/bin/docker-compose down
+ExecReload=/usr/local/bin/docker-compose pull
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

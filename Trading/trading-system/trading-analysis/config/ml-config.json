@@ -1,0 +1,54 @@
+{
+  "training": {
+    "model_selection_metric": "r2_score",
+    "cross_validation_folds": 5,
+    "test_size": 0.2,
+    "validation_size": 0.1,
+    "early_stopping_patience": 10
+  },
+  "models": {
+    "lstm": {
+      "lookback_period": 60,
+      "enabled": true,
+      "batch_size": 32,
+      "dropout_rate": 0.2,
+      "epochs": 100,
+      "learning_rate": 0.001
+    },
+    "xgboost": {
+      "subsample": 0.8,
+      "max_depth": 6,
+      "learning_rate": 0.1,
+      "enabled": true,
+      "n_estimators": 100,
+      "colsample_bytree": 0.8
+    },
+    "random_forest": {
+      "n_estimators": 100,
+      "max_depth": 10,
+      "min_samples_split": 5,
+      "enabled": true,
+      "min_samples_leaf": 2
+    }
+  },
+  "feature_engineering": {
+    "time_features": true,
+    "price_features": true,
+    "volume_features": true,
+    "rolling_windows": [
+      5,
+      10,
+      20,
+      50
+    ],
+    "volatility_features": true,
+    "technical_indicators": true,
+    "lag_features": [
+      1,
+      2,
+      3,
+      5,
+      10
+    ]
+  }
+}

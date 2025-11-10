@@ -1,0 +1,122 @@
+# Gitpod Configuration for GenX FX Trading System
+# This file configures your Gitpod workspace for the AMP trading system
+
+image: gitpod/workspace-full:latest
+
+# Environment variables
+env:
+  # AMP System Configuration
+  AMP_ENV: development
+  PYTHONPATH: /workspace
+  
+  # Docker Configuration
+  DOCKER_USERNAME: lengkundee01@gmail.com
+  DOCKER_IMAGE: keamouyleng/genx-fx
+  DOCKER_TAG: latest
+  
+  # Python Configuration
+  PYTHON_VERSION: "3.11"
+
+# Ports to expose
+ports:
+  - port: 8000
+    onOpen: open-preview
+    name: "Backend API"
+  - port: 5173
+    onOpen: open-browser
+    name: "Frontend App"
+  - port: 3000
+    onOpen: open-preview
+    name: Grafana Dashboard
+  - port: 5432
+    onOpen: ignore
+    name: "PostgreSQL"
+  - port: 6379
+    onOpen: ignore
+    name: "Redis"
+  - port: 27017
+    onOpen: ignore
+    name: "MongoDB"
+
+# Tasks to run when workspace starts
+tasks:
+  - name: Setup AMP Environment
+    init: |
+      echo "🚀 Setting up AMP Trading System..."
+      python3 --version
+      pip3 --version
+    command: |
+      echo "📦 Installing dependencies..."
+      pip3 install -r requirements.txt
+      pip3 install -r requirements-amp.txt
+      echo "✅ Dependencies installed!"
+      
+  - name: Setup Docker (if needed)
+    init: |
+      echo "🐳 Checking Docker..."
+    command: |
+      if ! command -v docker &> /dev/null; then
+        echo "Installing Docker..."
+        curl -fsSL https://get.docker.com -o get-docker.sh
+        sh get-docker.sh
+        sudo usermod -aG docker gitpod
+      else
+        echo "Docker already installed"
+      fi
+      
+  - name: Initialize AMP System
+    init: |
+      echo "🔧 Initializing AMP system..."
+      mkdir -p logs reports data
+    command: |
+      echo "📋 Creating configuration files..."
+      if [ ! -f .env ]; then
+        cp .env.example .env
+        echo "⚠️  Please update .env with your API keys"
+      fi
+      echo "✅ AMP system initialized!"
+
+  - name: Install GitLab CLI
+    init: |
+      echo "🦊 Installing GitLab CLI..."
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+      brew install glab
+    command: |
+      echo "✅ GitLab CLI installed!"
+
+  - name: Run Backend Server
+    command: |
+      uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
+
+  - name: Run Frontend Server
+    command: |
+      npm run dev
+
+# VS Code extensions to install
+vscode:
+  extensions:
+    - ms-python.python
+    - ms-python.vscode-pylance
+    - ms-vscode.vscode-json
+    - redhat.vscode-yaml
+    - ms-azuretools.vscode-docker
+    - bradlc.vscode-tailwindcss
+    - esbenp.prettier-vscode
+    - ms-vscode.vscode-typescript-next
+    - ms-toolsai.jupyter
+    - dbaeumer.vscode-eslint
+
+# Workspace settings
+workspaceLocation: .
+
+# Prebuild configuration
+github:
+  prebuilds:
+    master: true
+    branches: true
+    pullRequests: true
+    pullRequestsFromForks: true
+    addCheck: true
+    addComment: true
+    addBadge: true

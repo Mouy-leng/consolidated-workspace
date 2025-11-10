@@ -1,0 +1,54 @@
+{
+  "api_provider": "gemini",
+  "plugins": [
+    {
+      "name": "gemini-integration",
+      "source": "genx-trading",
+      "enabled": true,
+      "services": [
+        "gemini_service"
+      ],
+      "description": "Google Gemini AI integration for market analysis"
+    },
+    {
+      "name": "reddit-signals",
+      "source": "genx-trading",
+      "enabled": true,
+      "services": [
+        "reddit_service"
+      ],
+      "description": "Reddit integration for social sentiment analysis"
+    },
+    {
+      "name": "news-aggregator",
+      "source": "genx-trading",
+      "enabled": true,
+      "services": [
+        "news_service"
+      ],
+      "description": "Multi-source news aggregation for market analysis"
+    },
+    {
+      "name": "websocket-streams",
+      "source": "genx-trading",
+      "enabled": true,
+      "services": [
+        "websocket_service"
+      ],
+      "description": "Multi-exchange WebSocket streams for real-time data"
+    }
+  ],
+  "services": [],
+  "dependencies": [
+    "websockets"
+  ],
+  "env_vars": {},
+  "description": "Complete integration: Gemini AI, Reddit signals, multi-source news, and WebSocket streams",
+  "enable_sentiment_analysis": true,
+  "enable_social_signals": true,
+  "enable_news_feeds": true,
+  "enable_websocket_streams": true,
+  "enabled_services": [
+    "websocket_service"
+  ]
+}

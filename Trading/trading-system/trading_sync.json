@@ -1,0 +1,12 @@
+{
+  "balance": 47.79,
+  "risk_percent": 1.5,
+  "max_lot": 0.02,
+  "min_lot": 0.01,
+  "server_ip": "95.179.194.198:443",
+  "max_trades": 2,
+  "server": "FBS-Real-4",
+  "account_id": "241926287",
+  "last_sync": "2025-10-31 09:52:29",
+  "daily_loss_limit": 5.0
+}

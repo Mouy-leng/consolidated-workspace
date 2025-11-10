@@ -1,0 +1,46 @@
+[
+  {
+    "type": "BUY",
+    "reason": "MA Bullish Trend + Price Above MA20",
+    "entry": 4035.60009765625,
+    "stop_loss": 4000.497,
+    "take_profit": 4156.668100585937,
+    "confidence": "MEDIUM",
+    "timestamp": "2025-10-31T03:00:10.284360",
+    "rsi": 68.43589420096635,
+    "setup": "MA_CROSS_BULL"
+  },
+  {
+    "type": "BUY",
+    "reason": "MA Bullish Trend + Price Above MA20",
+    "entry": 4039.89990234375,
+    "stop_loss": 4001.770592712402,
+    "take_profit": 4161.096899414063,
+    "confidence": "MEDIUM",
+    "timestamp": "2025-10-31T03:15:11.283007",
+    "rsi": 67.00141160316787,
+    "setup": "MA_CROSS_BULL"
+  },
+  {
+    "type": "BUY",
+    "reason": "MA Bullish Trend + Price Above MA20",
+    "entry": 4038.300048828125,
+    "stop_loss": 4004.511834716797,
+    "take_profit": 4159.449050292968,
+    "confidence": "MEDIUM",
+    "timestamp": "2025-10-31T04:55:20.485302",
+    "rsi": 68.10893924692479,
+    "setup": "MA_CROSS_BULL"
+  },
+  {
+    "type": "BUY",
+    "reason": "MA Bullish Trend + Price Above MA20",
+    "entry": 4035.0,
+    "stop_loss": 4005.8302097167966,
+    "take_profit": 4156.05,
+    "confidence": "MEDIUM",
+    "timestamp": "2025-10-31T05:10:20.742457",
+    "rsi": 59.5818163258362,
+    "setup": "MA_CROSS_BULL"
+  }
+]

@@ -1,0 +1,6 @@
+#!/bin/bash
+# GenX Trading Platform - Head CLI Launcher
+# This script makes the head CLI easily accessible
+
+cd "$(dirname "$0")"
+python3 head_cli.py "$@"

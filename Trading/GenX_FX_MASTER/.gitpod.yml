@@ -1,0 +1,61 @@
+# GitPod Configuration for GenX_FX
+image: gitpod/workspace-python-3.11
+
+# Commands that will run on workspace startup
+tasks:
+  - name: Setup Environment
+    init: |
+      # Install Python dependencies
+      pip install -r requirements.txt
+      
+      # Set up environment variables for Firebase
+      echo 'export FIREBASE_API_KEY="{{FIREBASE_API_KEY}}"' >> ~/.bashrc
+      echo 'export FIREBASE_PROJECT_ID="{{FIREBASE_PROJECT_ID}}"' >> ~/.bashrc
+      
+      # Set up Git configuration
+      git config --global user.name "GenX_FX Developer"
+      git config --global user.email "developer@genx-fx.com"
+      
+      # Install additional development tools
+      pip install pytest black flake8 mypy
+      
+    command: |
+      echo "🚀 GenX_FX Development Environment Ready!"
+      echo "📁 Project structure:"
+      tree -L 2 || ls -la
+      echo "🔧 Available commands:"
+      echo "  - python src/main.py (run the application)"
+      echo "  - pytest tests/ (run tests)"
+      echo "  - black . (format code)"
+
+# VS Code extensions to install
+vscode:
+  extensions:
+    - ms-python.python
+    - ms-python.black-formatter
+    - ms-python.flake8
+    - ms-python.mypy-type-checker
+    - ms-vscode.vscode-json
+    - redhat.vscode-yaml
+    - ms-python.debugpy
+    - GitHub.copilot
+
+# Ports to expose
+ports:
+  - port: 8080
+    onOpen: open-preview
+    name: GenX_FX API Server
+  - port: 3000
+    onOpen: open-preview
+    name: Frontend Development Server
+
+# Environment variables
+github:
+  prebuilds:
+    master: true
+    branches: true
+    pullRequests: true
+    pullRequestsFromForks: true
+    addCheck: true
+    addComment: false
+    addBadge: false

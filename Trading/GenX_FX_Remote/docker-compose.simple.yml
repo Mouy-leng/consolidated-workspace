@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  # Database Service
+  mysql:
+    image: mysql:8.0
+    container_name: genxdb_fx_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: genxdb_fx_db
+      MYSQL_USER: genx_user
+      MYSQL_PASSWORD: genx_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/init:/docker-entrypoint-initdb.d
+    networks:
+      - genx_network
+
+  # Redis for caching
+  redis:
+    image: redis:7-alpine
+    container_name: genxdb_fx_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - genx_network
+
+  # Monitoring Service
+  monitoring:
+    image: grafana/grafana:latest
+    container_name: genxdb_fx_monitoring
+    restart: unless-stopped
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+    networks:
+      - genx_network
+
+volumes:
+  mysql_data:
+  redis_data:
+  grafana_data:
+
+networks:
+  genx_network:
+    driver: bridge

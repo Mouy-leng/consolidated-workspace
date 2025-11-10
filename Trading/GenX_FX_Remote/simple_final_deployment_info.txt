@@ -1,0 +1,47 @@
+GenX-FX Trading Platform Simple Final Deployment
+===============================================
+
+Deployment Date: Wed Aug 13 05:23:09 PM UTC 2025
+GitHub Repository: https://github.com/genxdbxfx1-ctrl/GenX_db_FX-.git
+
+Services:
+- SQLite Database: genxdb_fx.db
+- API Backend: localhost:8080
+
+Credentials:
+- Database: SQLite (genxdb_fx.db)
+- Admin User: admin@genxdbxfx1.com
+
+MT5 Credentials:
+- Login: 279023502
+- Server: Exness-MT5Trial8
+- Password: Leng12345@#simple_final_setup.sh1
+
+Useful Commands:
+- Start platform: ./start_trading_platform.sh
+- View database: sqlite3 genxdb_fx.db
+- Test API: curl http://localhost:8080/health
+- API docs: http://localhost:8080/docs
+
+API Endpoints:
+- Health Check: http://localhost:8080/health
+- API Documentation: http://localhost:8080/docs
+- Trading Pairs: http://localhost:8080/trading-pairs
+- Users: http://localhost:8080/users
+- MT5 Info: http://localhost:8080/mt5-info
+
+Database Tables:
+- users: User accounts
+- trading_accounts: Trading account information
+- trading_pairs: Available trading pairs
+- market_data: Historical market data
+- trading_signals: Trading signals from models
+- trades: Executed trades
+- model_predictions: ML model predictions
+- system_logs: System logs
+
+Next Steps:
+1. Start the platform: ./start_trading_platform.sh
+2. Access API docs: http://localhost:8080/docs
+3. Configure API keys in .env file
+4. Set up MT5 connection

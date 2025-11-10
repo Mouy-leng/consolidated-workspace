@@ -1,0 +1,75 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+env/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# IDE
+.vscode/
+.idea/
+.cursor/
+.qodo/
+*.code-workspace
+
+# Version Control
+.git/
+.gitignore
+.gitpod.yml
+
+# Development
+node_modules/
+*.log
+logs/
+*.db
+*.sqlite3
+
+# Build & Distribution
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Testing
+.coverage
+htmlcov/
+.tox/
+.pytest_cache/
+
+# Environment
+.env
+.env.*
+credentials/
+
+# Backups & Temp
+backup/
+backups/
+temp/
+*.tmp
+*.bak
+
+# Large files
+awscliv2.zip
+*.zip
+*.tar.gz
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Specific directories
+-p/
+all in once/
+bitter sweet/
+inetpub/
+Mouy-leng/
+Program Files/
+Development/
+eSupport/
+gemini_mcp_server/

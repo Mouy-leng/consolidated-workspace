@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "genx-fx-trading"
+  },
+  "targets": {
+    "genx-fx-trading": {
+      "hosting": {
+        "genx-fx": [
+          "genx-fx-trading"
+        ]
+      }
+    }
+  }
+}

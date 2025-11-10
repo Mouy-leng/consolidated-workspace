@@ -1,0 +1,36 @@
+stages:
+  - build
+  - push
+
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: "/certs"
+
+build:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+  script:
+    - docker build -f Dockerfile.production -t keamouyleng/genx_docker:$CI_COMMIT_SHA .
+    - docker tag keamouyleng/genx_docker:$CI_COMMIT_SHA keamouyleng/genx_docker:latest
+  only:
+    - main
+    - master
+
+push:
+  stage: push
+  image: docker:latest
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+  script:
+    - docker push keamouyleng/genx_docker:$CI_COMMIT_SHA
+    - docker push keamouyleng/genx_docker:latest
+  only:
+    - main
+    - master 

@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+  amp-system:
+    image: keamouyleng/genx-fx:latest
+    container_name: amp-trading-system
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./logs:/app/logs
+      - ./data:/app/data
+      - ./reports:/app/reports
+      - ./.env:/app/.env:ro
+    environment:
+      - PYTHONPATH=/app
+      - AMP_ENV=production
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - amp-network
+
+  # Optional: Redis for caching and job queue
+  redis:
+    image: redis:7-alpine
+    container_name: amp-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - amp-network
+
+  # Optional: PostgreSQL for data storage
+  postgres:
+    image: postgres:15-alpine
+    container_name: amp-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: amp_trading
+      POSTGRES_USER: amp_user
+      POSTGRES_PASSWORD: amp_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - amp-network
+
+  # Optional: Monitoring with Grafana
+  grafana:
+    image: grafana/grafana:latest
+    container_name: amp-grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=amp_admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+    networks:
+      - amp-network
+
+volumes:
+  redis_data:
+  postgres_data:
+  grafana_data:
+
+networks:
+  amp-network:
+    driver: bridge

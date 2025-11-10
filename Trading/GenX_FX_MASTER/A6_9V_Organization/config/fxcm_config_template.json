@@ -1,0 +1,56 @@
+{
+  "fxcm_forexconnect": {
+    "enabled": true,
+    "use_mock": false,
+    "username": "${FXCM_USERNAME}",
+    "password": "${FXCM_PASSWORD}",
+    "connection_type": "${FXCM_CONNECTION_TYPE}",
+    "url": "${FXCM_URL}",
+    "session_id": null,
+    "pin": null,
+    "timeout": 30,
+    "retry_attempts": 3,
+    "auto_reconnect": true
+  },
+  "data_provider": {
+    "primary": "fxcm_forexconnect",
+    "fallback": "mock",
+    "refresh_interval": 30,
+    "symbols": [
+      "EURUSD",
+      "GBPUSD", 
+      "USDJPY",
+      "USDCHF",
+      "AUDUSD",
+      "USDCAD",
+      "NZDUSD"
+    ],
+    "timeframes": [
+      "M15",
+      "H1", 
+      "H4",
+      "D1"
+    ]
+  },
+  "spreadsheet": {
+    "enabled": true,
+    "output_directory": "signal_output",
+    "update_interval": 30,
+    "max_signals": 50,
+    "formats": {
+      "excel": true,
+      "csv": true,
+      "json": true,
+      "mt4_csv": true,
+      "mt5_csv": true
+    },
+    "include_account_info": true,
+    "include_market_data": true,
+    "auto_backup": true
+  },
+  "security": {
+    "encrypt_credentials": true,
+    "log_sensitive_data": false,
+    "session_timeout": 3600
+  }
+}

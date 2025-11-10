@@ -1,0 +1,13 @@
+name: Branch Cleanup
+on:
+  schedule:
+    - cron: '0 2 * * 0'
+  workflow_dispatch:
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Delete merged branches
+        run: |
+          git branch -r --merged main | grep -v main | grep -v develop | xargs -n 1 git push --delete origin

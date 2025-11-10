@@ -1,0 +1,30 @@
+# Trading Analysis System Requirements
+
+# Core data and analysis
+pandas>=2.0.0
+numpy>=1.24.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.15.0
+yfinance>=0.2.0
+scipy>=1.11.0
+
+# Machine Learning
+scikit-learn>=1.3.0
+tensorflow>=2.13.0
+xgboost>=1.7.0
+
+# Web Dashboard
+streamlit>=1.25.0
+dash>=2.12.0
+
+# Technical Analysis
+ta-lib>=0.4.0
+
+# Utilities
+requests>=2.31.0
+python-dotenv>=1.0.0
+beautifulsoup4>=4.12.0
+
+# Development
+jupyter>=1.0.0

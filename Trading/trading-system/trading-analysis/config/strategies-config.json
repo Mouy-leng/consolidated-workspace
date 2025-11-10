@@ -1,0 +1,41 @@
+{
+  "smart_money_strategy": {
+    "enabled": true,
+    "parameters": {
+      "order_block_strength_min": 3,
+      "max_position_size": 0.05,
+      "structure_break_confirmation": 2,
+      "risk_reward_ratio": 4.0,
+      "liquidity_zone_touches_min": 3
+    }
+  },
+  "macd_strategy": {
+    "enabled": true,
+    "parameters": {
+      "fast_period": 12,
+      "max_position_size": 0.1,
+      "risk_reward_ratio": 2.5,
+      "slow_period": 26,
+      "signal_period": 9
+    }
+  },
+  "rsi_strategy": {
+    "enabled": true,
+    "parameters": {
+      "overbought": 70,
+      "max_position_size": 0.1,
+      "rsi_period": 14,
+      "risk_reward_ratio": 2.0,
+      "oversold": 30
+    }
+  },
+  "ma_cross_strategy": {
+    "enabled": true,
+    "parameters": {
+      "max_position_size": 0.08,
+      "risk_reward_ratio": 3.0,
+      "fast_ma": 20,
+      "slow_ma": 50
+    }
+  }
+}

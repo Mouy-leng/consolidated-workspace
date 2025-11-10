@@ -1,0 +1,32 @@
+{
+  "services": {
+    "main_app": {
+      "running": true,
+      "pid": 15600,
+      "start_time": "2025-10-23T22:51:33.426574",
+      "restart_count": 1
+    },
+    "amp_system": {
+      "running": true,
+      "pid": 5008,
+      "start_time": "2025-10-23T22:52:25.662608",
+      "restart_count": 1
+    },
+    "remote_control": {
+      "running": true,
+      "pid": 18856,
+      "start_time": "2025-10-23T22:52:32.861040",
+      "restart_count": 1
+    }
+  },
+  "system": {
+    "cpu_percent": 100.0,
+    "memory_mb": 7252.890625,
+    "memory_percent": 92.8,
+    "disk_percent": 99.47621423046023,
+    "network_bytes_sent": 17478762,
+    "network_bytes_recv": 70160364,
+    "timestamp": "2025-10-23T22:52:33.936598"
+  },
+  "last_update": "2025-10-23T22:53:01.582940"
+}

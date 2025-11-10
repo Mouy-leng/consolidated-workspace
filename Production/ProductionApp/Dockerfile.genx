@@ -1,0 +1,28 @@
+# Fix GenX containers with proper FastAPI dependencies
+FROM python:3.11-slim
+
+# Set working directory
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+RUN pip install --no-cache-dir \
+    fastapi==0.119.1 \
+    uvicorn[standard]==0.37.0 \
+    pydantic==2.12.2 \
+    requests==2.31.0 \
+    python-multipart==0.0.6 \
+    aiofiles==23.2.1
+
+# Copy the FastAPI application
+COPY genx_main.py /app/main.py
+
+# Expose port
+EXPOSE 8000
+
+# Run the application
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

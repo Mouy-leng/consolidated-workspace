@@ -1,0 +1,21 @@
+# AWS Deployment Commands for Cursor Agent
+
+# 1. Test AWS CLI
+aws sts get-caller-identity
+
+# 2. Create key pair
+aws ec2 create-key-pair --key-name genx-fx-key --region us-east-1 --query 'KeyMaterial' --output text > genx-fx-key.pem
+
+# 3. Deploy stack
+aws cloudformation deploy \
+  --template-file deploy/aws-free-tier-deploy.yml \
+  --stack-name production-genx-fx-free-tier \
+  --parameter-overrides Environment=production KeyPairName=genx-fx-key \
+  --capabilities CAPABILITY_IAM \
+  --region us-east-1
+
+# 4. Get outputs
+aws cloudformation describe-stacks \
+  --stack-name production-genx-fx-free-tier \
+  --region us-east-1 \
+  --query 'Stacks[0].Outputs'

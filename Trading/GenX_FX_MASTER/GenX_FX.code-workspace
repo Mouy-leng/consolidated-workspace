@@ -1,0 +1,118 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "files.associations": {
+            "*.py": "python",
+            "*.js": "javascript",
+            "*.ts": "typescript",
+            "*.json": "json",
+            "*.md": "markdown",
+            "*.yml": "yaml",
+            "*.yaml": "yaml"
+        },
+        "python.defaultInterpreterPath": "./venv/Scripts/python.exe",
+        "python.terminal.activateEnvironment": true,
+        "terminal.integrated.cwd": "${workspaceFolder}",
+        "git.ignoreLimitWarning": true
+    },
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "Python: Current File",
+                "type": "python",
+                "request": "launch",
+                "program": "${file}",
+                "console": "integratedTerminal",
+                "cwd": "${workspaceFolder}"
+            },
+            {
+                "name": "Python: FastAPI",
+                "type": "python",
+                "request": "launch",
+                "module": "uvicorn",
+                "args": ["src.main:app", "--reload"],
+                "console": "integratedTerminal",
+                "cwd": "${workspaceFolder}"
+            },
+            {
+                "name": "Node.js: Current File",
+                "type": "node",
+                "request": "launch",
+                "program": "${file}",
+                "cwd": "${workspaceFolder}"
+            }
+        ]
+    },
+    "tasks": {
+        "version": "2.0.0",
+        "tasks": [
+            {
+                "label": "Install Python Dependencies",
+                "type": "shell",
+                "command": "pip",
+                "args": ["install", "-r", "requirements.txt"],
+                "group": "build",
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "shared"
+                },
+                "options": {
+                    "cwd": "${workspaceFolder}"
+                }
+            },
+            {
+                "label": "Run Tests",
+                "type": "shell",
+                "command": "python",
+                "args": ["-m", "pytest", "tests/", "-v"],
+                "group": "test",
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "shared"
+                },
+                "options": {
+                    "cwd": "${workspaceFolder}"
+                }
+            },
+            {
+                "label": "Format Code",
+                "type": "shell",
+                "command": "black",
+                "args": ["src/", "tests/"],
+                "group": "build",
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "shared"
+                },
+                "options": {
+                    "cwd": "${workspaceFolder}"
+                }
+            }
+        ]
+    },
+    "extensions": {
+        "recommendations": [
+            "ms-python.python",
+            "ms-python.black-formatter",
+            "ms-python.autopep8",
+            "esbenp.prettier-vscode",
+            "eamodio.gitlens",
+            "github.copilot",
+            "github.copilot-chat",
+            "pkief.material-icon-theme",
+            "ms-vscode.powershell",
+            "ms-vscode.vscode-json"
+        ]
+    }
+}

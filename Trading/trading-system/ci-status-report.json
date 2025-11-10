@@ -1,0 +1,38 @@
+{
+  "timestamp": "2025-10-31T04:16:40.224424",
+  "components": {
+    "trading-signal-generator.py": {
+      "exists": true,
+      "size": 12487
+    },
+    "trading-microservice/src/plugins/mt5-plugin.js": {
+      "exists": true,
+      "size": 7180
+    },
+    "security/credential-manager.js": {
+      "exists": true,
+      "size": 3349
+    },
+    "mt5-fbs-setup/fbs_real_config.json": {
+      "exists": true,
+      "size": 212
+    },
+    "security/": {
+      "exists": true,
+      "files": 4
+    },
+    "mt5-fbs-setup/": {
+      "exists": true,
+      "files": 31
+    },
+    "trading-analysis/": {
+      "exists": true,
+      "files": 5125
+    },
+    "gdrive-scanner/": {
+      "exists": true,
+      "files": 10
+    }
+  },
+  "overall": "healthy"
+}

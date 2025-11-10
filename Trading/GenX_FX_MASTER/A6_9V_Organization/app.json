@@ -1,0 +1,68 @@
+{
+  "name": "GenX FX Trading System",
+  "description": "Advanced AI-Powered Forex Signal Generator for MT4/5 Expert Advisors",
+  "repository": "https://github.com/your-username/genx-fx-trading",
+  "logo": "https://raw.githubusercontent.com/your-username/genx-fx-trading/main/assets/logo.png",
+  "keywords": [
+    "forex",
+    "trading",
+    "ai",
+    "machine-learning",
+    "mt4",
+    "mt5",
+    "signals",
+    "python",
+    "react",
+    "typescript"
+  ],
+  "success_url": "/",
+  "env": {
+    "SECRET_KEY": {
+      "description": "A secret key for verifying the integrity of signed cookies.",
+      "generator": "secret"
+    },
+    "JWT_SECRET": {
+      "description": "JWT secret for authentication tokens.",
+      "generator": "secret"
+    },
+    "FXCM_ACCESS_TOKEN": {
+      "description": "FXCM API access token for live market data",
+      "required": false
+    },
+    "BYBIT_API_KEY": {
+      "description": "Bybit API key for additional market data",
+      "required": false
+    },
+    "BYBIT_API_SECRET": {
+      "description": "Bybit API secret",
+      "required": false
+    },
+    "LOG_LEVEL": {
+      "description": "Application log level",
+      "value": "INFO"
+    },
+    "ENVIRONMENT": {
+      "description": "Application environment",
+      "value": "production"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "standard-1x"
+    }
+  },
+  "addons": [
+    "heroku-postgresql:essential-0",
+    "heroku-redis:mini"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    },
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "stack": "heroku-22"
+}

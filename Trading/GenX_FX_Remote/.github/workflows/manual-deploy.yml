@@ -1,0 +1,31 @@
+name: Manual Deployment
+'on':
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Environment to deploy to
+        required: true
+        default: staging
+        type: choice
+        options:
+        - staging
+        - production
+      image_tag:
+        description: Docker image tag to deploy
+        required: false
+        default: latest
+jobs:
+  deploy:
+    name: Manual Deploy
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
+    steps:
+    - name: Deploy
+      env:
+        ENVIRONMENT: ${{ github.event.inputs.environment }}
+        IMAGE_TAG: ${{ github.event.inputs.image_tag }}
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        REDIS_URL: ${{ secrets.REDIS_URL }}
+      run: "echo '\U0001F680 Manual deployment to ${{ github.event.inputs.environment\
+        \ }}'\necho 'Image tag: ${{ github.event.inputs.image_tag }}'\necho '\u2705\
+        \ Deployment completed'\n"

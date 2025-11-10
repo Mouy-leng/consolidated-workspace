@@ -1,0 +1,23 @@
+{
+  "dashboard": {
+    "title": "GenX-FX Monitoring",
+    "panels": [
+      {
+        "title": "API Response Time",
+        "type": "graph"
+      },
+      {
+        "title": "Error Rate",
+        "type": "stat"
+      },
+      {
+        "title": "Active Users",
+        "type": "gauge"
+      },
+      {
+        "title": "System Resources",
+        "type": "table"
+      }
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "forex_majors": [
+    "EURUSD",
+    "GBPUSD",
+    "USDJPY",
+    "USDCHF"
+  ],
+  "metals": [
+    "XAUUSD",
+    "XAGUSD"
+  ],
+  "indices": [
+    "US30",
+    "US500",
+    "NAS100"
+  ]
+}

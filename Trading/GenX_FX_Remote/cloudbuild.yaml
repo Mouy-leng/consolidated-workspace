@@ -1,0 +1,57 @@
+steps:
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-f', 'Dockerfile.exness', '-t', 'gcr.io/$PROJECT_ID/genx-exness-ea', '.']
+    timeout: '1200s'
+  
+  # Push the container image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/genx-exness-ea']
+    timeout: '300s'
+  
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'genx-exness-ea'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/genx-exness-ea'
+      - '--region'
+      - 'europe-west1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--memory'
+      - '2Gi'
+      - '--cpu'
+      - '2'
+      - '--timeout'
+      - '3600'
+      - '--concurrency'
+      - '80'
+      - '--port'
+      - '8080'
+      - '--set-env-vars'
+      - 'BROKER=exness,TRADING_MODE=live,PYTHONPATH=/app'
+    timeout: '600s'
+
+images:
+  - 'gcr.io/$PROJECT_ID/genx-exness-ea'
+
+# Updated service account configuration for Cloud Build API v1
+# The default Cloud Build service account should be used
+# serviceAccount: 'projects/$PROJECT_ID/serviceAccounts/PROJECT_NUMBER-compute@developer.gserviceaccount.com'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+  machineType: 'E2_HIGHCPU_8'
+  diskSizeGb: '100'
+  # Add environment variables for the build process
+  env:
+    - 'CLOUDSDK_COMPUTE_ZONE=europe-west1'
+    - 'CLOUDSDK_COMPUTE_REGION=europe-west1'
+
+# Add timeout for the entire build
+timeout: '3600s'

@@ -1,0 +1,106 @@
+{
+  "folders": [
+    {
+      "name": "GenX FX Root",
+      "path": "."
+    },
+    {
+      "name": "API",
+      "path": "./api"
+    },
+    {
+      "name": "Client",
+      "path": "./client"
+    },
+    {
+      "name": "Expert Advisors",
+      "path": "./expert-advisors"
+    }
+  ],
+  "settings": {
+    "python.defaultInterpreterPath": "python",
+    "python.terminal.activateEnvironment": true,
+    "docker.dockerPath": "docker",
+    "git.autofetch": true,
+    "git.enableSmartCommit": true,
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "files.associations": {
+      "*.mq4": "cpp",
+      "*.mq5": "cpp"
+    },
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    },
+    "githubPullRequests.ignoredPullRequestBranches": [
+      "main"
+    ]
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-python.python",
+      "ms-azuretools.vscode-docker",
+      "github.copilot",
+      "ms-azuretools.vscode-azurecontainerapps",
+      "googlecloudtools.cloudcode",
+      "amazonwebservices.amazon-q-vscode"
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Start GenX API",
+        "type": "shell",
+        "command": "python",
+        "args": ["-m", "uvicorn", "api.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"],
+        "group": "build",
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "new"
+        }
+      },
+      {
+        "label": "Start Client Dev Server",
+        "type": "shell",
+        "command": "npm",
+        "args": ["run", "dev"],
+        "options": {
+          "cwd": "${workspaceFolder}/client"
+        },
+        "group": "build"
+      },
+      {
+        "label": "Docker Build",
+        "type": "shell",
+        "command": "docker",
+        "args": ["build", "-t", "genx-fx", "."],
+        "group": "build"
+      },
+      {
+        "label": "Deploy to GCP",
+        "type": "shell",
+        "command": "gcloud",
+        "args": ["run", "deploy", "genx-api", "--source", ".", "--region", "us-central1"],
+        "group": "build"
+      }
+    ]
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Debug GenX API",
+        "type": "python",
+        "request": "launch",
+        "program": "${workspaceFolder}/api/main.py",
+        "console": "integratedTerminal",
+        "env": {
+          "PYTHONPATH": "${workspaceFolder}"
+        }
+      }
+    ]
+  }
+}

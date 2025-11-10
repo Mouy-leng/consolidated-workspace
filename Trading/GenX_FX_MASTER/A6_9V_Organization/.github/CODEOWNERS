@@ -1,0 +1,35 @@
+# Global code owners
+* @Mouy-leng
+
+# Python files
+*.py @Mouy-leng
+
+# Configuration files
+*.yml *.yaml *.json *.toml @Mouy-leng
+
+# Documentation
+*.md @Mouy-leng
+
+# Docker files
+Dockerfile* docker-compose* @Mouy-leng
+
+# GitHub workflows
+.github/workflows/ @Mouy-leng
+
+# AWS and deployment
+aws/ deploy/ @Mouy-leng
+
+# Expert Advisors
+expert-advisors/ @Mouy-leng
+
+# Core modules
+core/ @Mouy-leng
+
+# API and services
+api/ @Mouy-leng
+
+# Scripts and utilities
+scripts/ utils/ @Mouy-leng
+
+# Tests
+tests/ @Mouy-leng

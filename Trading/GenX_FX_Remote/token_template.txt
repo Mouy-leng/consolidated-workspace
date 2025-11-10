@@ -1,0 +1,45 @@
+# GenX_FX Token Configuration Template
+# Copy this to your secret file and replace with actual tokens
+
+# GitHub Personal Access Token
+# Get from: GitHub Settings > Developer settings > Personal access tokens > Tokens (classic)
+# Required scopes: repo, workflow, admin:repo_hook, user:email
+GITHUB_TOKEN=ghp_your_github_token_here
+
+# GitHub Username (for authentication)
+GITHUB_USERNAME=your_github_username
+
+# GitLab Personal Access Token (if using GitLab)
+# Get from: GitLab Settings > Access Tokens
+# Required scopes: api, read_repository, write_repository
+GITLAB_TOKEN=glpat-your_gitlab_token_here
+
+# Gitpod Access Token (for cloud development)
+# Get from: Gitpod Settings > Access Tokens
+GITPOD_TOKEN=gitpod_io_your_token_here
+
+# AWS Credentials (for deployment)
+AWS_ACCESS_KEY_ID=your_aws_access_key
+AWS_SECRET_ACCESS_KEY=your_aws_secret_key
+AWS_REGION=us-east-1
+
+# Docker Hub (for container deployments)
+DOCKER_USERNAME=your_docker_username
+DOCKER_TOKEN=your_docker_access_token
+
+# Additional API Keys
+FXCM_API_KEY=your_fxcm_api_key
+FXCM_ACCESS_TOKEN=your_fxcm_access_token
+
+# Example format for your secret file:
+# Either use JSON format:
+# {
+#   "GITHUB_TOKEN": "ghp_your_actual_token",
+#   "GITHUB_USERNAME": "your_username",
+#   "GITLAB_TOKEN": "glpat_your_token"
+# }
+#
+# Or key=value format:
+# GITHUB_TOKEN=ghp_your_actual_token
+# GITHUB_USERNAME=your_username
+# GITLAB_TOKEN=glpat_your_token

@@ -1,0 +1,14 @@
+name: GPL License Scan
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm install
+      - run: npm install -g license-checker
+      - run: license-checker --json > license_report.json

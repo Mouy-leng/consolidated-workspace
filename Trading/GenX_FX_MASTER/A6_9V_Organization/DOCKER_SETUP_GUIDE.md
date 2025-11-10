@@ -1,0 +1,207 @@
+# Docker Setup Guide for GenX FX Trading Platform
+
+## 🐳 Docker Registry Configuration
+
+### Registry Details
+- **Registry**: `keamouyleng`
+- **Username**: `keamouyleng`
+- **Password**: `leng12345@#$%01`
+- **Token**: `t_wZXJXn95IiS2n__skVnWsvmcVP8`
+- **Image**: `genx-fx-dev`
+- **Tag**: `latest`
+
+## 🚀 Quick Setup
+
+### 1. Docker Login
+```bash
+# Login to Docker registry
+docker login -u keamouyleng -p leng12345@#$%01
+```
+
+### 2. Build and Push Image
+```bash
+# Run the setup script
+./docker-setup.sh
+```
+
+### 3. Manual Build (Alternative)
+```bash
+# Build the image
+docker build -t keamouyleng/genx-fx-dev:latest .
+
+# Tag the image
+docker tag keamouyleng/genx-fx-dev:latest keamouyleng/genx-fx-dev:latest
+
+# Push to registry
+docker push keamouyleng/genx-fx-dev:latest
+```
+
+## 🔧 DevContainer Configuration
+
+### Updated devcontainer.json
+The devcontainer has been configured to use the custom Docker image:
+```json
+{
+  "name": "GenX-FX-Dev",
+  "image": "keamouyleng/genx-fx-dev:latest",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:1": {},
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.11"
+    }
+  },
+  "remoteEnv": {
+    "PYTHONPATH": "/workspaces/GenX_FX",
+    "DOCKER_REGISTRY": "keamouyleng",
+    "DOCKER_IMAGE": "genx-fx-dev"
+  }
+}
+```
+
+## 📁 Environment Configuration
+
+### .env File (Auto-generated)
+The `docker-setup.sh` script automatically creates a `.env` file with:
+```bash
+# Docker Registry Configuration
+DOCKER_REGISTRY=keamouyleng
+DOCKER_USERNAME=keamouyleng
+DOCKER_IMAGE=genx-fx-dev
+DOCKER_TAG=latest
+
+# GitHub Repository
+GITHUB_REPO=https://github.com/Mouy-leng/GenX-EA_Script.git
+GITHUB_BRANCH=main
+
+# Development Environment
+NODE_ENV=development
+PYTHON_ENV=development
+
+# API Configuration
+API_HOST=0.0.0.0
+API_PORT=8000
+API_WORKERS=4
+
+# Database Configuration
+DATABASE_URL=sqlite:///./genx_fx.db
+
+# Logging
+LOG_LEVEL=INFO
+LOG_FILE=logs/genx_fx.log
+
+# Security
+SECRET_KEY=your-secret-key-here-change-in-production
+JWT_SECRET=your-jwt-secret-here-change-in-production
+
+# External APIs (to be configured)
+GEMINI_API_KEY=your-gemini-api-key
+NEWSDATA_API_KEY=your-newsdata-key
+ALPHAVANTAGE_API_KEY=your-alphavantage-key
+REDDIT_CLIENT_ID=your-reddit-client-id
+REDDIT_CLIENT_SECRET=your-reddit-client-secret
+BYBIT_API_KEY=your-bybit-api-key
+BYBIT_API_SECRET=your-bybit-api-secret
+```
+
+## 🎯 Repository Push Status
+
+### ✅ Successfully Pushed to Target Repository
+- **Source**: `feature/fxcm-integration-with-spreadsheet`
+- **Target**: `https://github.com/Mouy-leng/GenX-EA_Script.git`
+- **Branch**: `main` (force updated)
+- **Status**: ✅ Complete
+
+### Git Commands Used
+```bash
+# Add target remote
+git remote add target https://github.com/Mouy-leng/GenX-EA_Script.git
+
+# Force push current branch to main
+git push target feature/fxcm-integration-with-spreadsheet:main --force
+```
+
+## 🔍 Verification Steps
+
+### 1. Check Docker Image
+```bash
+# List local images
+docker images | grep keamouyleng
+
+# Pull and test the image
+docker pull keamouyleng/genx-fx-dev:latest
+docker run --rm keamouyleng/genx-fx-dev:latest --help
+```
+
+### 2. Verify DevContainer
+```bash
+# Check if devcontainer can access the image
+docker run --rm keamouyleng/genx-fx-dev:latest python -c "print('DevContainer ready!')"
+```
+
+### 3. Check Repository
+Visit: https://github.com/Mouy-leng/GenX-EA_Script.git
+- Verify the main branch has been updated
+- Check that all files are present
+- Confirm Docker configuration is in place
+
+## 🛠️ Troubleshooting
+
+### Docker Login Issues
+```bash
+# Clear existing credentials
+docker logout
+
+# Login with credentials
+docker login -u keamouyleng -p leng12345@#$%01
+```
+
+### Build Issues
+```bash
+# Clean build
+docker system prune -f
+docker build --no-cache -t keamouyleng/genx-fx-dev:latest .
+```
+
+### Push Issues
+```bash
+# Check registry access
+docker pull keamouyleng/genx-fx-dev:latest
+
+# Retry push
+docker push keamouyleng/genx-fx-dev:latest
+```
+
+## 📊 Current Status
+
+### ✅ Completed
+- [x] Docker registry configuration
+- [x] DevContainer setup with custom image
+- [x] Dockerfile optimization
+- [x] Environment configuration
+- [x] Repository push to target
+- [x] Setup script creation
+
+### 🔄 Next Steps
+1. **Test DevContainer**: Open in VS Code with DevContainers extension
+2. **Configure API Keys**: Update `.env` file with actual API keys
+3. **Deploy to Production**: Use Docker Compose for production deployment
+4. **Monitor**: Set up logging and monitoring
+
+## 🎉 Success!
+
+The GenX FX Trading Platform has been successfully:
+- ✅ Configured with Docker registry `keamouyleng`
+- ✅ Updated with custom DevContainer image
+- ✅ Pushed to target repository `GenX-EA_Script`
+- ✅ Ready for development and deployment
+
+**Registry**: `keamouyleng/genx-fx-dev:latest`
+**Repository**: `https://github.com/Mouy-leng/GenX-EA_Script.git`
+
+---
+
+*Generated by GenX FX Setup Assistant* 

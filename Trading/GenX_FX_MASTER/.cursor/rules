@@ -1,0 +1,95 @@
+# GenX_FX Cursor AI Rules and Guidelines
+
+## Project Context
+This is a GenX_FX trading system project focused on:
+- AI-powered foreign exchange trading
+- Real-time market analysis
+- Automated trading strategies
+- Risk management systems
+- Multi-platform integration
+
+## Code Style Guidelines
+- Use Python 3.11+ features when appropriate
+- Follow PEP 8 style guidelines
+- Use type hints for all functions and methods
+- Write comprehensive docstrings for classes and functions
+- Use descriptive variable and function names
+- Keep functions focused and single-purpose
+
+## Architecture Patterns
+- Use dependency injection for better testability
+- Implement proper error handling and logging
+- Follow async/await patterns for I/O operations
+- Use dataclasses or Pydantic models for data structures
+- Implement proper configuration management
+
+## Trading System Specific Rules
+- Always include proper risk management
+- Validate all trading parameters before execution
+- Log all trading decisions and outcomes
+- Implement circuit breakers for safety
+- Use proper decimal precision for financial calculations
+
+## Testing Guidelines
+- Write unit tests for all business logic
+- Use pytest for testing framework
+- Mock external dependencies
+- Test edge cases and error conditions
+- Maintain high test coverage
+
+## Security Considerations
+- Never hardcode API keys or secrets
+- Use environment variables for configuration
+- Implement proper authentication and authorization
+- Validate all user inputs
+- Use secure communication protocols
+
+## AI Integration Best Practices
+- Implement proper model validation
+- Use appropriate confidence thresholds
+- Include model versioning and rollback capabilities
+- Monitor model performance metrics
+- Implement A/B testing for model improvements
+
+## Database Guidelines
+- Use SQLAlchemy ORM for database operations
+- Implement proper migrations with Alembic
+- Use connection pooling for performance
+- Implement proper indexing strategies
+- Handle database transactions properly
+
+## API Development
+- Follow RESTful API principles
+- Use FastAPI for high performance
+- Implement proper request/response validation
+- Use appropriate HTTP status codes
+- Include comprehensive API documentation
+
+## Documentation
+- Keep README.md up to date
+- Document API endpoints with OpenAPI/Swagger
+- Include setup and deployment instructions
+- Provide code examples for key features
+- Maintain changelog for releases
+
+## Performance Optimization
+- Use caching where appropriate
+- Implement proper connection pooling
+- Monitor and optimize database queries
+- Use async operations for I/O bound tasks
+- Profile code for performance bottlenecks
+
+## Error Handling
+- Use specific exception types
+- Log errors with appropriate context
+- Implement retry mechanisms for transient failures
+- Provide meaningful error messages
+- Handle graceful degradation
+
+## When suggesting code changes:
+1. Explain the reasoning behind the change
+2. Consider the impact on the overall system
+3. Suggest improvements for maintainability
+4. Include relevant tests when appropriate
+5. Consider security implications
+6. Think about scalability and performance

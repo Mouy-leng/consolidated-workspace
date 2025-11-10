@@ -1,0 +1,93 @@
+# Environment Variables (CRITICAL - NEVER COMMIT)
+.env
+.env.*
+*.env
+
+# Sensitive Configuration Files
+config/production.json
+secrets/
+credentials/
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Logs
+*.log
+logs/
+device-manager.log
+trading.log
+device-sync-registry.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Node.js (for microservice)
+node_modules/
+npm-debug.log
+yarn-error.log
+coverage/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Device Data
+device-data/
+device-sync-registry.json
+
+# Backup files
+*.bak
+*.backup
+*.old
+*.tmp
+
+# Trading specific
+trading-data/
+backups/
+*.mq4
+*.mq5
+*.ex4
+*.ex5
+
+# SSH Keys
+id_rsa
+id_rsa.pub
+*.pem
+ssh_keys/
+
+# AWS
+.aws/
+aws-credentials
+
+# Database
+*.db
+*.sqlite
+*.sqlite3

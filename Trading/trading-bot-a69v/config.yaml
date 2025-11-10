@@ -1,0 +1,47 @@
+# Trading Bot Configuration
+# A6-9V Organization - mouy-leng
+
+# Exchange Configuration
+exchange:
+  exchange_id: bybit  # Using Bybit exchange
+  testnet: true  # IMPORTANT: Start with testnet for safety!
+  
+# Trading Parameters
+trading:
+  symbol: BTC/USDT  # Trading pair
+  base_currency: USDT  # Base currency for balance checks
+  timeframe: 5m  # Candle timeframe (1m, 5m, 15m, 1h, etc.)
+  
+# Strategy Configuration
+strategy:
+  name: momentum
+  lookback: 20  # Number of candles for analysis
+  momentum_threshold: 0.001  # 0.1% momentum threshold
+  risk_percentage: 0.05  # Risk 5% of balance per trade
+  min_balance: 10  # Minimum balance required to trade (USDT)
+  
+# Risk Management
+risk:
+  max_position_size: 0.1  # Maximum 10% of balance per position
+  stop_loss_percentage: 0.02  # 2% stop loss
+  take_profit_percentage: 0.05  # 5% take profit
+  max_daily_trades: 10  # Maximum trades per day
+  max_open_positions: 1  # Maximum concurrent positions
+  
+# Execution Settings
+execution:
+  order_type: market  # market or limit
+  slippage_tolerance: 0.001  # 0.1% slippage tolerance
+  retry_attempts: 3  # Number of retry attempts for failed orders
+  
+# Monitoring
+monitoring:
+  analysis_interval: 60  # Analyze market every 60 seconds
+  log_level: INFO  # DEBUG, INFO, WARNING, ERROR
+  enable_notifications: false  # Enable/disable notifications
+  
+# Safety Features
+safety:
+  paper_trading: true  # IMPORTANT: Keep true until you're ready for live trading
+  require_confirmation: false  # Require manual confirmation for trades
+  max_loss_per_day: 50  # Maximum loss per day in USDT

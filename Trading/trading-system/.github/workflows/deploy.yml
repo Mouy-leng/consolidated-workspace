@@ -1,0 +1,73 @@
+name: Deploy Trading System
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ 'v*' ]
+
+jobs:
+  deploy-vps:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup SSH
+      uses: webfactory/ssh-agent@v0.8.0
+      with:
+        ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
+    
+    - name: Deploy to VPS
+      run: |
+        ssh -o StrictHostKeyChecking=no trading@${{ secrets.VPS_IP }} '
+          cd /home/trading/trading-system &&
+          git pull origin main &&
+          pip install -r requirements.txt &&
+          npm install &&
+          pm2 restart trading-system
+        '
+    
+    - name: Health check
+      run: |
+        sleep 30
+        curl -f http://${{ secrets.VPS_IP }}:3000/health || exit 1
+
+  deploy-mt5:
+    runs-on: windows-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install dependencies
+      run: |
+        pip install -r mt5-fbs-setup/requirements.txt
+    
+    - name: Deploy MT5 components
+      run: |
+        python mt5-fbs-setup/quick-setup.py
+    
+    - name: Test MT5 connection
+      run: |
+        python mt5-fbs-setup/test-connection.py
+
+  notify:
+    needs: [deploy-vps, deploy-mt5]
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+    - name: Notify deployment status
+      run: |
+        if [ "${{ needs.deploy-vps.result }}" == "success" ] && [ "${{ needs.deploy-mt5.result }}" == "success" ]; then
+          echo "✅ Deployment successful"
+        else
+          echo "❌ Deployment failed"
+          exit 1
+        fi

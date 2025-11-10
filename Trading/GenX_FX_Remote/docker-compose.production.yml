@@ -1,0 +1,233 @@
+version: '3.8'
+
+services:
+  # Main API Service
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.production
+    container_name: genx-api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://genx_user:${DB_PASSWORD}@postgres:5432/genx_trading
+      - MONGODB_URL=mongodb://mongo:27017/genx_trading
+      - REDIS_URL=redis://redis:6379
+      - SECRET_KEY=${SECRET_KEY}
+      - BYBIT_API_KEY=${BYBIT_API_KEY}
+      - BYBIT_API_SECRET=${BYBIT_API_SECRET}
+      - LOG_LEVEL=INFO
+    depends_on:
+      - postgres
+      - mongo
+      - redis
+    volumes:
+      - ./ai_models:/app/ai_models
+      - ./data:/app/data
+      - ./logs:/app/logs
+    networks:
+      - genx-network
+
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: genx-postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=genx_user
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=genx_trading
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    networks:
+      - genx-network
+
+  # MongoDB Database
+  mongo:
+    image: mongo:7-jammy
+    container_name: genx-mongo
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
+      - MONGO_INITDB_DATABASE=genx_trading
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - genx-network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: genx-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - genx-network
+
+  # Discord Bot Service
+  discord_bot:
+    build:
+      context: .
+      dockerfile: Dockerfile.production
+    container_name: genx-discord-bot
+    restart: unless-stopped
+    command: python services/discord_bot.py
+    environment:
+      - DATABASE_URL=postgresql://genx_user:${DB_PASSWORD}@postgres:5432/genx_trading
+      - DISCORD_TOKEN=${DISCORD_TOKEN}
+      - API_URL=http://api:8000
+    depends_on:
+      - api
+      - postgres
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - genx-network
+
+  # Telegram Bot Service
+  telegram_bot:
+    build:
+      context: .
+      dockerfile: Dockerfile.production
+    container_name: genx-telegram-bot
+    restart: unless-stopped
+    command: python services/telegram_bot.py
+    environment:
+      - DATABASE_URL=postgresql://genx_user:${DB_PASSWORD}@postgres:5432/genx_trading
+      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
+      - API_URL=http://api:8000
+    depends_on:
+      - api
+      - postgres
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - genx-network
+
+  # WebSocket Feed Service
+  websocket_feed:
+    build:
+      context: .
+      dockerfile: Dockerfile.production
+    container_name: genx-websocket-feed
+    restart: unless-stopped
+    command: python services/websocket_feed.py
+    environment:
+      - DATABASE_URL=postgresql://genx_user:${DB_PASSWORD}@postgres:5432/genx_trading
+      - REDIS_URL=redis://redis:6379
+      - BYBIT_API_KEY=${BYBIT_API_KEY}
+      - BYBIT_API_SECRET=${BYBIT_API_SECRET}
+    depends_on:
+      - redis
+      - postgres
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - genx-network
+
+  # Scheduler Service
+  scheduler:
+    build:
+      context: .
+      dockerfile: Dockerfile.production
+    container_name: genx-scheduler
+    restart: unless-stopped
+    command: python services/scheduler.py
+    environment:
+      - DATABASE_URL=postgresql://genx_user:${DB_PASSWORD}@postgres:5432/genx_trading
+      - API_URL=http://api:8000
+    depends_on:
+      - api
+      - postgres
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - genx-network
+
+  # AI Model Training Service
+  ai_trainer:
+    build:
+      context: .
+      dockerfile: Dockerfile.production
+    container_name: genx-ai-trainer
+    restart: unless-stopped
+    command: python services/ai_trainer.py
+    environment:
+      - DATABASE_URL=postgresql://genx_user:${DB_PASSWORD}@postgres:5432/genx_trading
+      - MONGODB_URL=mongodb://mongo:27017/genx_trading
+    depends_on:
+      - postgres
+      - mongo
+    volumes:
+      - ./ai_models:/app/ai_models
+      - ./data:/app/data
+      - ./logs:/app/logs
+    networks:
+      - genx-network
+
+  # Nginx Load Balancer
+  nginx:
+    image: nginx:alpine
+    container_name: genx-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/ssl:/etc/nginx/ssl
+      - ./logs/nginx:/var/log/nginx
+    depends_on:
+      - api
+    networks:
+      - genx-network
+
+  # Monitoring with Prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: genx-prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    networks:
+      - genx-network
+
+  # Grafana Dashboard
+  grafana:
+    image: grafana/grafana:latest
+    container_name: genx-grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana:/etc/grafana/provisioning
+    networks:
+      - genx-network
+
+volumes:
+  postgres_data:
+  mongo_data:
+  redis_data:
+  prometheus_data:
+  grafana_data:
+
+networks:
+  genx-network:
+    driver: bridge

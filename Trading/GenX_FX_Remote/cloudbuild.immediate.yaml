@@ -1,0 +1,58 @@
+steps:
+  # Build with the fixed cloud-optimized Dockerfile
+  - name: 'gcr.io/cloud-builders/docker'
+    args: 
+      - 'build'
+      - '-f'
+      - 'Dockerfile.cloud.fixed'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/genx-trading:$BUILD_ID'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/genx-trading:latest'
+      - '.'
+    timeout: '1200s'
+  
+  # Push the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', '--all-tags', 'gcr.io/$PROJECT_ID/genx-trading']
+    timeout: '300s'
+  
+  # Deploy to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'genx-trading'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/genx-trading:latest'
+      - '--region'
+      - 'us-central1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--memory'
+      - '1Gi'
+      - '--cpu'
+      - '1'
+      - '--timeout'
+      - '3600'
+      - '--port'
+      - '8080'
+      - '--set-env-vars'
+      - 'BROKER=exness,TRADING_MODE=cloud'
+      - '--max-instances'
+      - '5'
+      - '--min-instances'
+      - '0'
+    timeout: '600s'
+
+images:
+  - 'gcr.io/$PROJECT_ID/genx-trading'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+  machineType: 'E2_HIGHCPU_4'
+  diskSizeGb: 50
+
+timeout: '2400s'

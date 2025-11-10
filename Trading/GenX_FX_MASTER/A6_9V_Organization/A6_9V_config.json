@@ -1,0 +1,95 @@
+{
+  "organization": {
+    "name": "A6_9V",
+    "description": "Advanced AI Trading Organization",
+    "version": "2.0.0",
+    "created": "2025-10-26",
+    "status": "active",
+    "contact": "lengkundee01@gmail.com"
+  },
+  "project": {
+    "name": "GenX_FX",
+    "type": "Trading Platform",
+    "environment": "production",
+    "account_type": "LIVE",
+    "version": "2.0.0"
+  },
+  "broker": {
+    "name": "FBS Markets Inc. IO",
+    "login": "104818081",
+    "password": "Leng12345@#$01",
+    "server": "FBS-Demo",
+    "server_ip": "167.99.81.216:443",
+    "account_balance": 25.00,
+    "account_currency": "USD",
+    "account_type": "LIVE",
+    "environment": "production"
+  },
+  "trading": {
+    "enabled": true,
+    "auto_trading": true,
+    "risk_per_trade": 1.0,
+    "max_total_risk": 3.0,
+    "lot_size": 0.01,
+    "max_spread": 30,
+    "min_confidence": 0.8,
+    "max_concurrent_signals": 2,
+    "symbols": ["EURUSD", "GBPUSD", "USDJPY", "USDCHF", "AUDUSD", "USDCAD", "NZDUSD"],
+    "timeframes": ["M15", "H1", "H4", "D1"],
+    "primary_timeframe": "H1"
+  },
+  "ai_models": {
+    "ensemble_size": 5,
+    "models": ["random_forest", "xgboost", "lightgbm", "gradient_boosting", "svm"],
+    "retrain_interval": 24,
+    "lookback_periods": 100,
+    "confidence_threshold": 0.8,
+    "feature_engineering": true,
+    "cross_validation_folds": 5
+  },
+  "risk_management": {
+    "stop_loss_method": "atr_based",
+    "take_profit_ratio": 2.0,
+    "trailing_stop_enabled": false,
+    "risk_reward_minimum": 1.5,
+    "volatility_adjustment": true,
+    "market_condition_adjustment": true,
+    "position_sizing_method": "fixed_fractional"
+  },
+  "monitoring": {
+    "enabled": true,
+    "log_level": "INFO",
+    "performance_tracking": true,
+    "alert_notifications": true,
+    "health_checks": true,
+    "real_time_monitoring": true
+  },
+  "security": {
+    "encrypt_credentials": true,
+    "api_key_rotation": false,
+    "access_logging": true,
+    "error_reporting": true,
+    "session_timeout": 3600,
+    "anonymize_logs": false
+  },
+  "deployment": {
+    "platform": "cloud",
+    "containerization": "docker",
+    "scaling": "auto",
+    "backup_enabled": true,
+    "health_checks": true,
+    "auto_deployment": true
+  },
+  "github": {
+    "organization": "A6_9V",
+    "repository": "GenX_FX",
+    "branch": "main",
+    "auto_deploy": true,
+    "ci_cd": true
+  },
+  "notebook": {
+    "google_notebook": "https://notebooklm.google.com/notebook/be4f5096-029c-44b3-be0b-cf1b66608049",
+    "integration": "active",
+    "sync_enabled": true
+  }
+}

@@ -1,0 +1,5 @@
+timestamp,symbol,action,entry_price,stop_loss,take_profit,confidence,reasoning,source
+2025-11-04T16:14:58.690824,XAUUSD,BUY,2079.0,2054.0,2129.0,85.45,Rule-based analysis for XAUUSD during active session,rule_based
+2025-11-04T16:14:58.691752,XAUEUR,SELL,2033.0,2058.0,1983.0,73.16000000000001,Rule-based analysis for XAUEUR during active session,rule_based
+2025-11-04T16:14:58.692084,XAUGBP,BUY,2035.0,2010.0,2085.0,66.5,Rule-based analysis for XAUGBP during active session,rule_based
+2025-11-04T16:14:58.692364,XAUAUD,BUY,2011.0,1986.0,2061.0,57.0,Rule-based analysis for XAUAUD during active session,rule_based

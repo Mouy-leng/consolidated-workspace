@@ -1,0 +1,15 @@
+FROM python:3.9-slim
+
+WORKDIR /app
+
+# Install minimal requirements
+RUN pip install fastapi uvicorn requests
+
+# Copy fix script
+COPY quick_fix.py .
+
+# Expose port
+EXPOSE 8080
+
+# Run the fix
+CMD ["python", "quick_fix.py"]
