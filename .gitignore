@@ -10,9 +10,15 @@
 *.p12
 *.pfx
 secrets/
+.secrets/
 credentials/
 *.secret
 *.secure
+CREDENTIALS_AUDIT.md
+*credentials*
+*password*
+*setup-credentials*
+*setup_credentials*
 
 # Python
 __pycache__/
