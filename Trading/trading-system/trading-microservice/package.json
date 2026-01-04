@@ -25,7 +25,7 @@
   "author": "A6-9V",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.18.2",
+    "express": "^4.22.1",
     "helmet": "^7.1.0",
     "cors": "^2.8.5",
     "morgan": "^1.10.0",
